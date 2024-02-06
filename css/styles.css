@@ -1,0 +1,512 @@
+:root {
+    --background: #e2e2e2;
+    /* Фон */
+    --text-H1: #0a5355;
+    /* Цвет заголовка H1 */
+    --text-button: #0a5355;
+    /* Текст кнопок */
+    --border-button: #000;
+    /* Цвет обводки кнопки */
+    --button: #fff;
+    /* Цвет кнопки */
+    --button-hover-text: #0a5355;
+    /* Цвет текста вылделения кнопки */
+    --button-active-text: #e2e2e2;
+    /* Цвет текста нажатой кнопки */
+    --button-active-background: #0a5355;
+    /* Цвет нажатой кнопки */
+
+
+    --locomotive: #fff;
+    --white: #e2e2e2;
+    --orange: #FFAA00;
+    --pink: #DB5CA7;
+    --red: #C9194A;
+    --black: #000;
+    --yellow: #EACF7D;
+    --green: #008000;
+    --blue: #1F8DDD;
+}
+
+body {
+    background-color: var(--background);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    user-select: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Ruda", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    max-width: 420px;
+    min-height: 313px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.page {
+    bottom: 0;
+    left: 0;
+    height: 99%;
+    width: 100%;
+}
+
+.pageContante {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.container.img-container.logo {
+    height: 30vh;
+}
+
+.logoIMG {
+    height: 100%;
+}
+
+.container.img-container.map {
+    width: 45vh;
+    position: relative;
+    top: -2vh;
+}
+
+.mapIMG {
+    width: 100%;
+    height: auto;
+}
+
+.city-marker {
+    width: 3vh;
+    height: 3vh;
+    background-color: #0a5355;
+    border-radius: 50%;
+    border-color: #fff;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.city1,
+.city2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+
+#city1 {}
+
+#city2 {}
+
+.cityNamber {
+    margin-top: 70%;
+    color: #fff;
+    font-size: 80%;
+}
+
+.cityName {
+    box-shadow: #0a5355 1px 1px;
+    background-color: #fff;
+    padding: 0 20%;
+    border-radius: 1%;
+    color: #000;
+    font-size: 70%;
+}
+
+.top-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.player-name-container,
+.round-number-container {
+    width: 100%;
+    height: 2vh;
+    margin-top: -2vh;
+    text-align: center;
+}
+
+.round-number-container {
+    margin-top: 2vh;
+}
+
+.img-container.cards {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardsIMG {
+    height: 100%;
+    width: 100%;
+}
+
+.round-number-container {}
+
+#roundNumber {
+    margin-top: -4vh;
+    font-size: 3vh;
+}
+
+#playerName {
+    font-size: 2vh;
+}
+
+h1 {
+    color: var(--text-H1);
+    font-size: 3vh;
+    line-height: 80%;
+    font-weight: 1000;
+    text-transform: uppercase;
+    text-decoration-line: none;
+}
+
+.container.button-container.menu,
+.container.button-container.ticket {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 1vh;
+    flex-wrap: wrap;
+    width: 70%;
+    min-width: 120px;
+    flex-direction: column;
+}
+
+
+
+
+.button {
+    font-size: 3vh;
+    border-radius: 0.5vh;
+    border: 0.2vh solid var(--border-button);
+    text-transform: uppercase;
+    background-color: var(--button);
+    cursor: pointer;
+    color: var(--text-button);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 250px;
+}
+
+.button:active {
+    color: var(--button-active-text);
+    background-color: var(--button-active-background);
+}
+
+
+
+.button.back:active {
+    background-image: url('img/back2.svg');
+}
+
+
+.button-top-container {
+    width: 94%;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    margin: 1vh;
+}
+
+.button.menu {
+    height: 6vh;
+    width: 22vh;
+}
+
+.button.back {
+    width: 6vh;
+    height: 6vh;
+}
+
+.next-container {
+    width: 100%;
+    max-width: 525px;
+    position: fixed;
+    bottom: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.button.next {
+    width: 25vh;
+    height: 6vh;
+}
+
+.container.button-container.ticket {
+    flex-direction: column;
+    gap: 0.4vh;
+}
+
+.button.ticket {
+width:100% ;
+    height: 5vh;
+    font-size: 80%;
+}
+
+.button.ticket.blue {
+    color: #fff;
+    background-color: #1c77bc;
+}
+
+.button.ticket.blue.active {
+    color: var(--text-button);
+    background-color: #208fe4;
+}
+
+.button.ticket.blue.nonactive {
+    color: #828282;
+    border-color: #828282;
+    background-color: #e2e2e2;
+}
+
+.button.ticket.active {
+    border-color: #fffd88;
+    background-color: #e7f6ff;
+}
+
+.container.button-container.next-player {
+    position: fixed;
+    bottom: 2vh;
+}
+
+.button.next.player {
+    height: 6vh;
+}
+
+.desk {
+    margin-top: 2vh;
+    display: flex;
+    height: auto;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+.desk.n2 {
+    width: 100%;
+}
+
+.container.hand {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5vh;
+    height: 65vh;
+    width: 40%;
+}
+
+.container.openCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    border-radius: 0.5vh;
+    height: 65vh;
+    width: 20%;
+}
+
+.container.open5cards {
+    display: flex;
+    width: 19%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container.forDeck {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.cards {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.cards.open,
+.cards.close,
+.cards.deck.checkRoud,
+.container.checkRoud.set{
+    cursor: pointer;
+    background-color: #fff;
+    width: 90%;
+    height: 100%;
+    border: 0.4vh solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 1.3vh;
+}
+
+.cards.deck.checkRoud{
+    height: 20%;
+}
+
+.cards.close.deck {
+    height: 20%;
+}
+
+.cards.close.checkRoud {
+    height: 80%;
+    width: 100%;
+}
+
+.container.img-container.deck {
+    border-radius: 1vh;
+    background-color: #1F8DDD;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+
+.img-container.checkRoud{
+    background-color: #fff;
+    height: 80%;
+    width: 80%;
+}
+
+
+
+
+.cards.open.deck:active {
+    box-shadow: 0px 0px 0.2vh 2px #095b7b;
+}
+
+.cards.open.hand {
+    cursor: default;
+}
+
+.place.hand {
+    border-radius: 1.5vh;
+    border: 0.5vh dashed #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+
+.border {
+    background-color: #fff;
+    height: 94%;
+    width: 90%;
+    border-radius: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center
+}
+
+
+.button.newTickets {
+    position: fixed;
+    top: 3vh;
+    right: 1vh;
+    padding: 0vh 1vh;
+}
+
+.button-container.next {
+    position: fixed;
+    bottom: 2vh;
+}
+
+.cardsTest {
+    width: 90%;
+    font-size: 60%;
+    text-align: center;
+}
+
+
+
+
+
+#overlay {
+    z-index: 9999;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#popup {
+    background: var(--background);
+    padding: 5vh;
+    border-radius: 1vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--text-H1);
+}
+
+.popup-container {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+.action-button {
+    font-size: 2.5vh;
+    height: 6vh;
+    width: 25vh;
+}
