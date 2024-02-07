@@ -11,6 +11,51 @@ var ui = [
         "content": [
           {
             "type": "div",
+            "class": "overlay",
+            "id": "overlay",
+            "content": [
+              {
+                "type": "div",
+                "class": "popup",
+
+                "id": "popup",
+                "content": [
+                  {
+                    "type": "div",
+                    "class": "h1",
+
+                    "id": "first"
+                  },
+                  {
+                    "type": "div",
+                    "class": "h1",
+
+                    "id": "second"
+                  },
+                  {
+                    "type": "div",
+                    "class": "popup-container",
+                    "content": [
+                      {
+                        "type": "div",
+                        "class": "button action-button 1",
+                        "id": "button1",
+                        "onclick": "performAction(1)"
+                      },
+                      {
+                        "type": "div",
+                        "class": "button action-button 2",
+                        "id": "button2",
+                        "onclick": "performAction(2)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "div",
             "class": "container img-container logo",
             "content": [
               {
@@ -65,6 +110,51 @@ var ui = [
         "content": [
           {
             "type": "div",
+            "class": "overlay",
+            "id": "overlay",
+            "content": [
+              {
+                "type": "div",
+                "class": "popup",
+
+                "id": "popup",
+                "content": [
+                  {
+                    "type": "div",
+                    "class": "h1",
+
+                    "id": "first"
+                  },
+                  {
+                    "type": "div",
+                    "class": "h1",
+
+                    "id": "second"
+                  },
+                  {
+                    "type": "div",
+                    "class": "popup-container",
+                    "content": [
+                      {
+                        "type": "div",
+                        "class": "button action-button 1",
+                        "id": "button1",
+                        "onclick": "performAction(1)"
+                      },
+                      {
+                        "type": "div",
+                        "class": "button action-button 2",
+                        "id": "button2",
+                        "onclick": "performAction(2)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "div",
             "class": "container top-information top",
             "content": [
               {
@@ -89,7 +179,7 @@ var ui = [
                 "content": [
                   {
                     "type": "div",
-                    "class": "place hand",
+                    "class": "place hand page2",
                     "content": [
                       {
                         "type": "div",
@@ -121,7 +211,7 @@ var ui = [
                   },
                   {
                     "type": "div",
-                    "class": "place hand",
+                    "class": "place hand page2",
                     "content": [
                       {
                         "type": "div",
@@ -153,7 +243,7 @@ var ui = [
                   },
                   {
                     "type": "div",
-                    "class": "place hand",
+                    "class": "place hand page2",
                     "content": [
                       {
                         "type": "div",
@@ -811,8 +901,6 @@ var ui = [
   }
 ]
 
-
-
 /// База карточек
 //Вагоны
 var vagon = [
@@ -1004,7 +1092,7 @@ var deckVagons = [];
 var cardsOpen = [];
 var cardsHand = [];
 var locoFromOpen = 0;
-var checkCardsOpen = 1;
+var checkCardsOpen = 0;
 
 function newDeckVagons() {
   vagon.forEach(card => {
@@ -1317,8 +1405,8 @@ function open5Cards() {
 
 function takeCard(number) {
 
-  if (cardsHand.length < 2) {
-    if (cardsHand.length > 0 && cardsOpen[number - 1].color === 'Locomotive') {
+  if (cardsHand.length < 2 && checkCardsOpen === 0) {
+    if (cardsHand.length > 0 && locoFromOpen === 1) {
       playSound(clickSound);
     } else {
       if (cardsHand.length === 0 || (cardsHand.length === 1 && locoFromOpen !== 1)) {
@@ -1330,16 +1418,12 @@ function takeCard(number) {
         hideHand(cardsHand.length);
         if (cardsHand.length > 0 && cardsHand[cardsHand.length - 1].color === 'Locomotive') {
           locoFromOpen = 1;
-          console.log(locoFromOpen);
         }
         locomotiv3();
       } else {
         playSound(clickSound);
       }
     }
-
-
-
   } else {
     playSound(clickSound);
   }
@@ -1348,12 +1432,12 @@ function takeCard(number) {
     playSound(shuffleSound);
   }
   console.log(cardsHand);
+  console.log(checkCardsOpen);
 }
 
 function takeCardFromDeck() {
-  if (cardsHand.length < 2 && locoFromOpen === 0) {
+  if (cardsHand.length < 2 && locoFromOpen === 0 && checkCardsOpen === 0) {
     playSound(takeSound);
-
     cardsHand.push(deckVagons[0]);
     drawCard('.cards.open.hand', cardsHand.length, 1, deckVagons);
     hideHand(cardsHand.length);
@@ -1404,8 +1488,8 @@ function nextRoundText() {
 }
 
 function nextRound() {
-  console.log('test');
-  if (cardsHand.some(card => card.color === 'Locomotive') || cardsHand.length > 1) {
+  console.log(cardsHand);
+  if (locoFromOpen === 1 || cardsHand.length > 1) {
     playSound(takeSound);
 
     if (cardsHand.length > 0) {
@@ -1422,6 +1506,7 @@ function nextRound() {
   } else if (cardsHand.length === 1) {
     playSound(clickSound);
   } else if (checkCardsOpen === 1) {
+    toggleJustifyContent();
     checkCardsOpen = 0;
     roundN++;
     nextRoundText();
@@ -1469,12 +1554,7 @@ function selectPlayers(players) {
 }
 
 function back() {
-  playSound(clickSound);
-  //if (pageN === 1) {
-  reloadPage();
-  //} else {
-  //newGame();
-  //}
+  openPopup('back');
 }
 
 function switchPage(pageNumber) {
@@ -1488,6 +1568,16 @@ function switchPage(pageNumber) {
   var selectedPage = document.querySelector('.page.n' + pageNumber);
   if (selectedPage) {
     selectedPage.style.display = 'block';
+  }
+}
+
+function toggleJustifyContent() {
+  const containerForDeck = document.querySelector('.container.forDeck');
+
+  if (containerForDeck.style.justifyContent === 'flex-start') {
+    containerForDeck.style.justifyContent = 'space-between';
+  } else {
+    containerForDeck.style.justifyContent = 'flex-start';
   }
 }
 
@@ -1505,7 +1595,6 @@ function takeDeckVagons(name) {
   }
 }
 
-
 function checkRoud() {
   if (cardsHand.length === 0) {
     openPopup('checkWay');
@@ -1513,7 +1602,6 @@ function checkRoud() {
     playSound(clickSound);
   }
 }
-
 
 // Функция для отрисовки страницы по номеру
 function renderPage(pageNumber) {
@@ -1614,48 +1702,49 @@ function buildElement(elementData, container) {
 
 
 
-
-
-
-
-
-
-
-
 function openPopup(page) {
   playSound(clickSound);
-  var textPop1 = document.getElementById("first");
-  var textPop2 = document.getElementById("second");
-  var popupBut1 = document.getElementById("button1");
-  var popupBut2 = document.getElementById("button2");
+  if (checkCardsOpen === 0) {
 
-  // Установка общих стилей для всех страниц
-  document.getElementById('overlay').style.display = 'flex';
+    var textPop1 = document.getElementById("first");
+    var textPop2 = document.getElementById("second");
+    var popupBut1 = document.getElementById("button1");
+    var popupBut2 = document.getElementById("button2");
 
-  // Параметризация контента в зависимости от переданной страницы
-  if (page === 'way') {
-    textPop1.innerText = "PUT";
-    textPop2.innerText = "VAGONS?";
-    popupBut1.innerText = "PUT";
-    popupBut2.innerText = "BACK";
-  } else if (page === 'ticket' && cardsHand.length === 0) {
-    textPop1.innerText = "DO YOU WANT";
-    textPop2.innerText = "NEW TICKETS?";
-    popupBut1.innerText = "TAKE";
-    popupBut2.innerText = "BACK";
-  } else if (page === 'chuseway') {
-    textPop1.innerText = "Please, choose at least 3 tickets,";
-    textPop2.innerText = "if you did not choose a blue ticket, or at least 2 tickets if you chose a blue ticket.";
-    popupBut1.style.display = 'none';
-    popupBut2.innerText = "OK";
-  } else if (page === "checkWay") {
-    textPop1.innerText = "DO YOU WANT";
-    textPop2.innerText = "CHECK WAY?";
-    popupBut1.innerText = "CHECK";
-    popupBut2.innerText = "BACK";
-  } else {
-    document.getElementById('overlay').style.display = 'none';
+    // Установка общих стилей для всех страниц
+    document.getElementById('overlay').style.display = 'flex';
+
+    // Параметризация контента в зависимости от переданной страницы
+    if (page === 'way') {
+      textPop1.innerText = "PUT";
+      textPop2.innerText = "VAGONS?";
+      popupBut1.innerText = "PUT";
+      popupBut2.innerText = "BACK";
+    } else if (page === 'ticket' && cardsHand.length === 0) {
+      textPop1.innerText = "DO YOU WANT";
+      textPop2.innerText = "NEW TICKETS?";
+      popupBut1.innerText = "TAKE";
+      popupBut2.innerText = "BACK";
+    } else if (page === 'chuseway') {
+      textPop1.innerText = "Please, choose at least 3 tickets,";
+      textPop2.innerText = "if you did not choose a blue ticket, or at least 2 tickets if you chose a blue ticket.";
+      popupBut1.style.display = 'none';
+      popupBut2.innerText = "OK";
+    } else if (page === "checkWay") {
+      textPop1.innerText = "DO YOU WANT";
+      textPop2.innerText = "CHECK WAY?";
+      popupBut1.innerText = "CHECK";
+      popupBut2.innerText = "BACK";
+    } else if (page === 'back') {
+      textPop1.innerText = "ARE YOU SURE?";
+      textPop2.innerText = "GO OUT?";
+      popupBut1.innerText = "EXIT";
+      popupBut2.innerText = "BACK";
+    } else {
+      document.getElementById('overlay').style.display = 'none';
+    }
   }
+
 }
 
 function closePopup() {
@@ -1681,11 +1770,15 @@ function performAction(buttonId) {
       newTickets();
       nextRoundText();
     } else if (buttonText === "CHECK") {
+      toggleJustifyContent();
       checkCardsOpen = 1;
       playSound(takeSound);
       toggleVisibility('.container.checkRoud.set');
       toggleVisibility('.cards.deck.checkRoud');
       takeDeckVagons('.cards.open.checkRoud');
+
+    } else if (buttonText === 'EXIT') {
+      reloadPage();
     }
   } else if (buttonId === 2) {
 
@@ -1705,5 +1798,7 @@ function playSound(sound) {
 
 // Функция для перезагрузки страницы
 function reloadPage() {
+  playSound(takeSound);
+
   location.reload();
 }
