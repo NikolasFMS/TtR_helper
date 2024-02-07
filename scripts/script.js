@@ -1402,8 +1402,6 @@ function takeCard(number) {
       if (cardsHand.length === 0 || (cardsHand.length === 1 && locoFromOpen !== 1)) {
         playSound(takeSound);
         cardsHand.push(cardsOpen[number - 1]);
-        console.log(cardsHand[cardsHand.length-1]);
-
         if (cardsHand.length > 1 && cardsHand[cardsHand.length - 1].color === "Locomotive") {
           cardsHand.pop();
         } else {
@@ -1427,7 +1425,6 @@ function takeCard(number) {
     newDeckVagons();
     playSound(shuffleSound);
   }
-  console.log(locoFromOpen );
 }
 
 function takeCardFromDeck() {

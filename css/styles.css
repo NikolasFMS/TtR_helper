@@ -391,6 +391,8 @@ width:100% ;
 }
 .cards.deck.checkRoud{
     height: 20%;
+    border: 0.5vh solid #cecece;
+
 }
 
 .cards.deck.checkRoud:active{
@@ -419,7 +421,8 @@ border: 0.5vh solid #008000;
 
 
 
-
+.cards.close.deck:active {
+border-color: #EACF7D;}
 .cards.open.deck:active {
     box-shadow: 0px 0px 0.2vh 2px #095b7b;
 }
@@ -485,10 +488,6 @@ border: 0.5vh solid #008000;
     font-size: 60%;
     text-align: center;
 }
-
-
-
-
 
 #overlay {
     z-index: 9999;
