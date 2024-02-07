@@ -1138,9 +1138,11 @@ function takeAndRemove(array, count) {
 
 function selectRoutes() {
   roundRoutes = [];
-  roundRoutes = takeAndRemove(shuffleLowTickets, 5);
   if (roundN === 0) {
+    roundRoutes = takeAndRemove(shuffleLowTickets, 5);
     roundRoutes = roundRoutes.concat(takeAndRemove(shuffleHiTickets, 2));
+  } else {
+    roundRoutes = takeAndRemove(shuffleLowTickets, 3);
   }
   console.log("Выбранные маршруты:", roundRoutes);
 }
