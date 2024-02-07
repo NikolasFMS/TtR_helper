@@ -1182,6 +1182,8 @@ function swhowPlayerNumber() {
 function buttonTicketName() {
   const buttonTickets = document.getElementsByClassName("button ticket");
   if (roundN !== 0) {
+    buttonTickets[3].style.display = "none";
+    buttonTickets[4].style.display = "none";
     buttonTickets[5].style.display = "none";
     buttonTickets[6].style.display = "none";
   }
@@ -1728,8 +1730,13 @@ function openPopup(page) {
       popupBut1.innerText = "TAKE";
       popupBut2.innerText = "BACK";
     } else if (page === 'chuseway') {
-      textPop1.innerText = "Please, choose at least 3 tickets,";
-      textPop2.innerText = "if you did not choose a blue ticket, or at least 2 tickets if you chose a blue ticket.";
+      if (roundN !== 0){
+        textPop1.innerText = "Please, choose";
+        textPop2.innerText = "At least 1 tickets";
+      }else{
+        textPop1.innerText = "Please, choose at least 3 tickets,";
+        textPop2.innerText = "if you did not choose a blue ticket, or at least 2 tickets if you chose a blue ticket.";
+      }
       popupBut1.style.display = 'none';
       popupBut2.innerText = "OK";
     } else if (page === "checkWay") {
