@@ -1026,15 +1026,6 @@ var tickets = [
   { "city1": "LONDON", "city2": "PARIS", "vp": 3 }
 ];
 
-var clickSound = new Audio('audio/click.mp3');
-var shuffleSound = new Audio('audio/shuffle.wav');
-var takeSound = new Audio('audio/take.wav');
-var pageElements = document.querySelectorAll('.page');
-var pageArray = Array.from(pageElements);
-var countPlayers = 5;
-var playerNumber = 0;
-var pageN = 1;
-var roundN = 0;
 var cityName = [
   { "city": "EDINBURGH", "style": "top: 1%; left: 12.5%;" },
   { "city": "LONDON", "style": "top: 23%; left: 18%;" },
@@ -1084,15 +1075,28 @@ var cityName = [
   { "city": "ANGORA", "style": "top: 82%; left: 82%;" },
   { "city": "ERZURUM", "style": "top: 80%; left: 90%;" }
 ];
-var shuffleLowTickets = [];
-var shuffleHiTickets = [];
-var roundRoutes = [];
-var buttonNoneActive = [];
-var deckVagons = [];
-var cardsOpen = [];
-var cardsHand = [];
+
+var clickSound = new Audio('audio/click.mp3');
+var shuffleSound = new Audio('audio/shuffle.wav');
+var takeSound = new Audio('audio/take.wav');
+
+var pageElements = document.querySelectorAll('.page');
+var pageArray = Array.from(pageElements);
+
+var countPlayers = 5;
+var playerNumber = 0;
+var pageN = 1;
+var roundN = 0;
 var locoFromOpen = 0;
 var checkCardsOpen = 0;
+
+let deckVagons = [];
+let cardsOpen = [];
+let cardsHand = [];
+let shuffleLowTickets = [];
+let shuffleHiTickets = [];
+let roundRoutes = [];
+let buttonNoneActive = [];
 
 function newDeckVagons() {
   vagon.forEach(card => {
@@ -1112,15 +1116,11 @@ function shuffleArray(array) {
 }
 
 function lowTickets() {
-  // Фильтруем билеты с vp меньше или равным maxVp
-  const temp = tickets.filter(ticket => ticket.vp <= 15);
-  return shuffleArray(temp);
+  return shuffleArray(tickets.filter(ticket => ticket.vp <= 15));
 }
 
 function hiTickets() {
-  // Фильтруем билеты с vp , больше 16
-  const temp = tickets.filter(ticket => ticket.vp >= 16);
-  return shuffleArray(temp);
+  return shuffleArray(tickets.filter(ticket => ticket.vp >= 16));
 }
 
 function makeTicketDec() {
