@@ -1103,8 +1103,6 @@ function newDeckVagons() {
     Array.from({ length: card.count }, () => deckVagons.push({ "color": card.color }));
   });
   shuffleArray(deckVagons);
-  // Выводим результат
-  console.log(deckVagons);
 }
 
 function shuffleArray(array) {
@@ -1126,8 +1124,6 @@ function hiTickets() {
 function makeTicketDec() {
   shuffleLowTickets = lowTickets();
   shuffleHiTickets = hiTickets();
-  console.log("Короткие марщруты:", shuffleLowTickets);
-  console.log("Длинные маршруты:", shuffleHiTickets);
 }
 
 function takeAndRemove(array, count) {
@@ -1144,15 +1140,11 @@ function selectRoutes() {
   } else {
     roundRoutes = takeAndRemove(shuffleLowTickets, 3);
   }
-  console.log("Выбранные маршруты:", roundRoutes);
 }
 
 function cityMapSettings() {
   selectRoutes();
-
   buttonTicketName();
-  console.log("Короткие марщруты:", shuffleLowTickets);
-  console.log("Длинные маршруты:", shuffleHiTickets);
 }
 
 function showCityMap(ticketIndex) {
@@ -1280,8 +1272,6 @@ function nextPlayerTicket() {
     // Переносим все элементы из updatedRoundRoutes в конец shuffleLowTickets
     shuffleLowTickets.push(...updatedRoundRoutes);
 
-    console.log('Сброшенные маршруты: ' + JSON.stringify(updatedRoundRoutes));
-
     if (playerNumber >= countPlayers || roundN > 0) {
       playSound(shuffleSound);
       pageN++;
@@ -1323,7 +1313,6 @@ function nextPlayerTicket() {
 function drawCard(name, cardn, number, deck) {
   // Выбираем все карты с указанным именем
   const allCards = document.querySelectorAll(name);
-  console.log(allCards);
 
   // Проверяем, существует ли карта с указанным номером
   if (cardn <= allCards.length) {
@@ -1354,8 +1343,6 @@ function drawCard(name, cardn, number, deck) {
 function replaceCard(index) {
   cardsOpen[index] = deckVagons[0];
   deckVagons.splice(0, 1);
-  console.log('Колода вагонов: ' + JSON.stringify(deckVagons));
-  console.log('Открытые карты справа: ' + JSON.stringify(cardsOpen));
 }
 
 function locomotiv3() {
@@ -1404,7 +1391,6 @@ function open5Cards() {
       playSound(shuffleSound);
     }
   }
-  console.log('Колода вагонов: ' + JSON.stringify(deckVagons));
 }
 
 function takeCard(number) {
@@ -1416,14 +1402,20 @@ function takeCard(number) {
       if (cardsHand.length === 0 || (cardsHand.length === 1 && locoFromOpen !== 1)) {
         playSound(takeSound);
         cardsHand.push(cardsOpen[number - 1]);
-        replaceCard(number - 1);
-        drawCard('.cards.open.deck', number, number, cardsOpen);
-        drawCard('.cards.open.hand', cardsHand.length, cardsHand.length, cardsHand)
-        hideHand(cardsHand.length);
-        if (cardsHand.length > 0 && cardsHand[cardsHand.length - 1].color === 'Locomotive') {
-          locoFromOpen = 1;
+        console.log(cardsHand[cardsHand.length-1]);
+
+        if (cardsHand.length > 1 && cardsHand[cardsHand.length - 1].color === "Locomotive") {
+          cardsHand.pop();
+        } else {
+          replaceCard(number - 1);
+          drawCard('.cards.open.deck', number, number, cardsOpen);
+          drawCard('.cards.open.hand', cardsHand.length, cardsHand.length, cardsHand)
+          hideHand(cardsHand.length);
+          if (cardsHand.length > 0 && cardsHand[cardsHand.length - 1].color === 'Locomotive') {
+            locoFromOpen = 1;
+          }
+          locomotiv3();
         }
-        locomotiv3();
       } else {
         playSound(clickSound);
       }
@@ -1435,8 +1427,7 @@ function takeCard(number) {
     newDeckVagons();
     playSound(shuffleSound);
   }
-  console.log(cardsHand);
-  console.log(checkCardsOpen);
+  console.log(locoFromOpen );
 }
 
 function takeCardFromDeck() {
@@ -1446,7 +1437,6 @@ function takeCardFromDeck() {
     drawCard('.cards.open.hand', cardsHand.length, 1, deckVagons);
     hideHand(cardsHand.length);
     deckVagons.splice(0, 1);
-    console.log('Колода вагонов: ' + JSON.stringify(deckVagons));
   } else {
     playSound(clickSound);
   }
@@ -1492,7 +1482,6 @@ function nextRoundText() {
 }
 
 function nextRound() {
-  console.log(cardsHand);
   if (locoFromOpen === 1 || cardsHand.length > 1) {
     playSound(takeSound);
 
@@ -1554,7 +1543,6 @@ function selectPlayers(players) {
   renderPage(pageN);
   takeDeckVagons('.page.n2 .hand .cards.open');
   nextRoundText();
-  console.log("Игроков - " + countPlayers);
 }
 
 function back() {
@@ -1615,8 +1603,6 @@ function renderPage(pageNumber) {
   var currentPageData = ui[pageNumber - 1];
   if (currentPageData) {
     buildPage(currentPageData, contentContainer);
-
-    console.log("Страница " + pageNumber);  // Используем переданный номер страницы
   } else {
     console.error("Страница не найдена");
   }
@@ -1730,10 +1716,10 @@ function openPopup(page) {
       popupBut1.innerText = "TAKE";
       popupBut2.innerText = "BACK";
     } else if (page === 'chuseway') {
-      if (roundN !== 0){
+      if (roundN !== 0) {
         textPop1.innerText = "Please, choose";
         textPop2.innerText = "At least 1 tickets";
-      }else{
+      } else {
         textPop1.innerText = "Please, choose at least 3 tickets,";
         textPop2.innerText = "if you did not choose a blue ticket, or at least 2 tickets if you chose a blue ticket.";
       }
